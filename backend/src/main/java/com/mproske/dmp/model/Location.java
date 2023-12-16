@@ -1,6 +1,17 @@
 package com.mproske.dmp.model;
 
+// Spring Boot 3 migrated all Java EE APIs javax.* to their equivalent Jakarta EE variant jakarta.* 
+// due to the transition from Oracle to the Eclipse Foundation
+// https://mkyong.com/spring-boot/spring-boot-package-javax-persistence-does-not-exist/
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class Location {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     private String city;
