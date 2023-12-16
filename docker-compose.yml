@@ -1,5 +1,6 @@
 services:
   frontend:
+    container_name: frontend
     build: ./frontend
     ports:
       - "4200:80" # 4200:80 for Nginx
@@ -15,6 +16,7 @@ services:
             - node_modules/
 
   backend:
+    container_name: backend
     build: ./backend
     ports:
       - "8080:8080"
@@ -26,6 +28,7 @@ services:
           path: ./backend
     
   postgres:
+    container_name: postgres
     image: postgres:alpine
     ports:
       - "5432:5432"
