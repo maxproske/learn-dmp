@@ -1,6 +1,13 @@
 services:
-  app:
-    build: .
+  frontend:
+    build: ./frontend
+    ports:
+      - "4200:4200" # 4200:80 for Nginx
+    depends_on:
+      - backend
+
+  backend:
+    build: ./backend
     ports:
       - "8080:8080"
     depends_on:
@@ -32,8 +39,7 @@ volumes:
 #       ORACLE_CHARACTERSET: AL32UTF8
 #     volumes:
 #       - oracle-data:/opt/oracle/oradata
-#       - ./oracle_setup.sql:/docker-entrypoint-initdb.d/startup/oracle_setup.sql
-
+# 
 # volumes:
 #   oracle-data:
 
