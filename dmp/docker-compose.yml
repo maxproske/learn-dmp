@@ -1,0 +1,24 @@
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - oracle
+
+  # :-(
+  oracle:
+    container_name: oracle
+    image: container-registry.oracle.com/database/express:latest
+    ports:
+      - "1521:1521"
+    environment:
+      ORACLE_PDB: XEPDB1
+      ORACLE_PWD: oracle # Password for SYS, SYSTEM, and PDBADMIN
+      ORACLE_CHARACTERSET: AL32UTF8
+    volumes:
+      - oracle-data:/opt/oracle/oradata
+      - ./oracle_setup.sql:/docker-entrypoint-initdb.d/startup/oracle_setup.sql
+
+volumes:
+  oracle-data:
