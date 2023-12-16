@@ -2,9 +2,17 @@ services:
   frontend:
     build: ./frontend
     ports:
-      - "4200:4200" # 4200:80 for Nginx
+      - "4200:80" # 4200:80 for Nginx
     depends_on:
       - backend
+    # volumes:
+    #   - ./frontend/src:/app/src
+    develop:
+      watch:
+        - action: rebuild
+          path: ./frontend/src
+          ignore:
+            - node_modules/
 
   backend:
     build: ./backend
@@ -12,6 +20,10 @@ services:
       - "8080:8080"
     depends_on:
       - postgres
+    develop:
+      watch:
+        - action: rebuild
+          path: ./backend
     
   postgres:
     image: postgres:alpine

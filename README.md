@@ -12,3 +12,14 @@ This is an experiment to see if the Grimoire plugin for Gippity can help effecti
 - Data Grid: Pivotal Gemfire Grid
 - Frontend: Angular (http://localhost:4200/)
 - AI/ML Component: Python-based models or Java-based frameworks (like DL4J, or integrate with an external AI service)
+
+
+## Getting Started
+
+```sh
+docker compose up --build
+
+docker compose watch
+```
+
+Visit http://localhost:4200/
