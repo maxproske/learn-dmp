@@ -25,6 +25,18 @@ services:
         - action: rebuild
           path: ./backend
 
+  odm:
+    container_name: odm
+    image: icr.io/cpopen/odm-k8s/odm:8.12
+    environment:
+      - LICENSE=accept
+      - SAMPLE=true
+    ports:
+      - "9060:9060"
+      - "9443:9443"
+    mem_limit: 2048M
+    mem_reservation: 2048M
+
   # geode-locator:
   #   container_name: geode-locator
   #   image: apachegeode/geode
