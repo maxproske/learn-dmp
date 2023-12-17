@@ -1,18 +1,15 @@
 package com.mproske.dmp.model;
 
-// Spring Boot 3 migrated all Java EE APIs javax.* to their equivalent Jakarta EE variant jakarta.* 
-// due to the transition from Oracle to the Eclipse Foundation
-// https://mkyong.com/spring-boot/spring-boot-package-javax-persistence-does-not-exist/
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.gemfire.mapping.annotation.Region;
+import org.springframework.data.annotation.PersistenceConstructor;
 
-@Entity
-public class Location {
+import java.io.Serializable;
+
+@Region("Locations")
+public class Location implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String name;
     private String city;
     private String state;
@@ -21,8 +18,8 @@ public class Location {
     private boolean wifi;
     private boolean laundry;
 
-    // Parameterized constructor
-    public Location(int id, String name, String city, String state, String photo, int availableUnits, boolean wifi, boolean laundry) {
+    @PersistenceConstructor
+    public Location(Integer id, String name, String city, String state, String photo, int availableUnits, boolean wifi, boolean laundry) {
         this.id = id;
         this.name = name;
         this.city = city;
@@ -38,7 +35,7 @@ public class Location {
     }
 
     // Getters
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -71,7 +68,7 @@ public class Location {
     }
 
     // Setters
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

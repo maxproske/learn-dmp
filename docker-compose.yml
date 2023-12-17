@@ -20,27 +20,46 @@ services:
     build: ./backend
     ports:
       - "8080:8080"
-    depends_on:
-      - postgres
     develop:
       watch:
         - action: rebuild
           path: ./backend
-    
-  postgres:
-    container_name: postgres
-    image: postgres:alpine
-    ports:
-      - "5432:5432"
-    environment:
-      POSTGRES_DB: mydatabase
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-    volumes:
-      - postgres-data:/var/lib/postgresql/data
 
-volumes:
-  postgres-data:
+  # geode-locator:
+  #   container_name: geode-locator
+  #   image: apachegeode/geode
+  #   ports:
+  #     - "10334:10334"
+  #   command: gfsh start locator --name=geode-locator --port=10334 --bind-address=0.0.0.0 --hostname-for-clients=geode-locator --J=-Djava.net.preferIPv4Stack=true
+
+  # geode-server:
+  #   container_name: geode-server
+  #   image: apachegeode/geode
+  #   ports:
+  #     - "40404:40404"
+  #   volumes:
+  #     - ./geode/init-geode.sh:/init-geode.sh
+  #   environment:
+  #     - LOCATORS=geode-locator[10334]
+  #   entrypoint: /init-geode.sh
+  #   command: gfsh start server --name=geode-server --locators=geode-locator[10334] --server-port=40404 --bind-address=0.0.0.0 --hostname-for-clients=geode-server
+  #   depends_on:
+  #     - geode-locator
+       
+# postgres:
+#   container_name: postgres
+#   image: postgres:alpine
+#   ports:
+#     - "5432:5432"
+#   environment:
+#     POSTGRES_DB: mydatabase
+#     POSTGRES_USER: user
+#     POSTGRES_PASSWORD: password
+#   volumes:
+#     - postgres-data:/var/lib/postgresql/data
+
+# volumes:
+#   postgres-data:
 
 # :-(
 #   oracle:
